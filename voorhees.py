@@ -42,7 +42,7 @@ class Voorhees:
                 acc_result = acc_result[:-1]; acc_result += '],'
             else:
                 if type(obj) == str:
-                    acc_result += "'" + str(obj) +'"'; acc_result += ","
+                    acc_result += '"' + str(obj) + '"'; acc_result += ","
                 elif type(obj) == int:
                     acc_result += str(obj); acc_result += ","
                 elif type(obj) == bool:

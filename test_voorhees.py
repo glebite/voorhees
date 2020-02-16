@@ -63,3 +63,39 @@ def test_multiple_bools():
     result = Voorhees(original)
     assert original == result.copy()
 
+@pytest.mark.test_id(11)
+def test_nested_dir():
+    original = {'1': {'a': {'b': 3.14159}}}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(12)
+def test_list_of_dicts():
+    original = {'something': [{'a': 'c', 'b': 'd'}, {'c': 3}, {'d': 4}]}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(13)
+def test_list_of_lists_of_ints():
+    original = {'something': [[1,2,3,4], [5,6,7,8]]}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(14)
+def test_negative_ints():
+    original = {'what': -13}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(15)
+def test_negative_floats():
+    original = {'what': -5.67}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(16)
+def test_list_of_lists_of_ints():
+    original = {'something': [['a', 'b'], ['d', 'e', 'f']]}
+    result = Voorhees(original)
+    assert original == result.copy()
+
