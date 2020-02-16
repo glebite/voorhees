@@ -99,3 +99,26 @@ def test_list_of_lists_of_ints():
     result = Voorhees(original)
     assert original == result.copy()
 
+@pytest.mark.test_id(17)
+def test_empty_strings():
+    original = {'something': ''}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(18)
+def test_mix_it_up():
+    original = {"response_code": 200, "train_number": "12229", "position": "at Source", "route": [{"no": 1, "has_arrived": False, "has_departed": False, "scharr": "Source", "scharr_date": "15 Nov 2015", "actarr_date": "15 Nov 2015", "station": "LKO", "actdep": "22:15", "schdep": "22:15", "actarr": "00:00", "distance": "0", "day": 0}, {"actdep": "23:40", "scharr": "23:38", "schdep": "23:40", "actarr": "23:38", "no": 2, "has_departed": False, "scharr_date": "15 Nov 2015", "has_arrived": False, "station": "HRI", "distance": "101", "actarr_date": "15 Nov 2015", "day": 0}]}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(19)
+def test_deeper_test():
+    original = {"destination_addresses": ["Philadelphia, PA, USA"], "origin_addresses": ["New York, NY, USA"], "rows": [{"elements": [{"distance": {"text": "94.6 mi", "value": 152193}, "duration": {"text": "1 hour 44 mins", "value": 6227}, "status": "OK"}]}], "status": "OK"}
+    result = Voorhees(original)
+    assert original == result.copy()
+
+@pytest.mark.test_id(20)
+def test_lots_more():
+    original = {"destination_addresses": ["Washington, DC, USA", "Philadelphia, PA, USA", "Santa Barbara, CA, USA", "Miami, FL, USA", "Austin, TX, USA", "Napa County, CA, USA"], "origin_addresses": ["New York, NY, USA"], "rows": [{"elements": [{"distance": {"text": "227 mi", "value": 365468}, "duration": {"text": "3 hours 54 mins", "value": 14064}, "status": "OK"}, {"distance": {"text": "94.6 mi", "value": 152193}, "duration": {"text": "1 hour 44 mins", "value": 6227}, "status": "OK"}, {"distance": {"text": "2,878 mi", "value": 4632197}, "duration": {"text": "1 day 18 hours", "value": 151772}, "status": "OK"}, {"distance": {"text": "1,286 mi", "value": 2069031}, "duration": {"text": "18 hours 43 mins", "value": 67405}, "status": "OK"}, {"distance": {"text": "1,742 mi", "value": 2802972}, "duration": {"text": "1 day 2 hours", "value": 93070}, "status": "OK"}, {"distance": {"text": "2,871 mi", "value": 4620514}, "duration": {"text": "1 day 18 hours", "value": 152913}, "status": "OK"}]}], "status": "OK"}
+    result = Voorhees(original)
+    assert original == result.copy()    
