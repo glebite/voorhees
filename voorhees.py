@@ -28,12 +28,8 @@ class Voorhees:
                         acc_result += '"' + k + '":'                                        
                         if type(v) == str:
                             acc_result += '"{}",'.format(v)
-                        elif type(v) == int:
-                            acc_result += '{},'.format(v)
-                        elif type(v) == bool:
-                            acc_result += ' {},'.format(v).lower()
-                        elif type(v) == float:
-                            acc_result += '{},'.format(v)                            
+                        if type(v) in [int, bool, float]:
+                            acc_result += '{},'.format(v).lower()
                 acc_result = acc_result[:-1]; acc_result += '},'
             elif isinstance(obj, list):
                 acc_result += '['
@@ -42,13 +38,9 @@ class Voorhees:
                 acc_result = acc_result[:-1]; acc_result += '],'
             else:
                 if type(obj) == str:
-                    acc_result += '"' + str(obj) + '"'; acc_result += ","
-                elif type(obj) == int:
-                    acc_result += str(obj); acc_result += ","
-                elif type(obj) == bool:
-                    acc_result += " " +str(obj).lower(); acc_result += ","
-                elif type(obj) == float:
-                    acc_result += str(obj); acc_result += ","
+                    acc_result += '"' + str(obj) + '"' + ","
+                if type(obj) in [int, bool, float]:
+                    acc_result += str(obj) + ","
             return acc_result
         acc_result = walk(self.incoming_json_string, acc_result)
         print(acc_result[:-1])
