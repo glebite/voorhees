@@ -93,9 +93,9 @@ class Voorhees:
                 for k, v in obj.items():
                     if k == key:
                         if dump_as_json:
-                            acc_result = '{"' + key + '":' + str(obj[key]) + "}"
+                            acc_result = json.dumps('{"' + key + '":' + str(obj[key]) + "}")
                         else:
-                            acc_result = str(obj[key])
+                            acc_result = obj[key]
                         return acc_result
                     if isinstance(v, (dict, list)):
                         acc_result = walk(v, acc_result, key, dump_as_json)
