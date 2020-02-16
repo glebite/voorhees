@@ -31,7 +31,7 @@ class Voorhees:
                         elif type(v) == int:
                             acc_result += '{},'.format(v)
                         elif type(v) == bool:
-                            acc_result += '{},'.format(v)
+                            acc_result += ' {},'.format(v).lower()
                         elif type(v) == float:
                             acc_result += '{},'.format(v)                            
                 acc_result = acc_result[:-1]; acc_result += '},'
@@ -46,7 +46,7 @@ class Voorhees:
                 elif type(obj) == int:
                     acc_result += str(obj); acc_result += ","
                 elif type(obj) == bool:
-                    acc_result += str(obj); acc_result += ","
+                    acc_result += " " +str(obj).lower(); acc_result += ","
                 elif type(obj) == float:
                     acc_result += str(obj); acc_result += ","
             return acc_result
