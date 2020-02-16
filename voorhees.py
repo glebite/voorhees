@@ -9,11 +9,23 @@ class Voorhees:
     """
     def __init__(self,json_string):
         """
+        initialization method - takes a string
         """
         self.incoming_json_string = json_string
-        
+
+    def __repr__(self):
+        """ representation - minimized output """
+        return "<Voorhees {}...>".format(json_string[0:10])
+
+    def __str__(self):
+        """ string - full string conversion of json_string """
+        return str(json_string)
+    
     def copy(self):
         """
+        copy - this performs a dictionary copy
+        This is more of an exploration into types, traversal, recursion,
+        and a matter of a programming exercise.  Refactoring to follow.
         """
         acc_result = ""
         def walk(obj, acc_result):
