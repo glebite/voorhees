@@ -142,6 +142,11 @@ class Voorhees:
                     acc_result += str(obj) + ","
             return acc_result
         acc_result = walk(self.incoming_json_string, acc_result,key)
+        if acc_result == "},":
+            # degenerate case of deleting last element
+            # inelegance implies flawed logic
+            acc_result = "}"
+            return json.loads('' or '{}')
         return json.loads(acc_result[:-1])
 
     

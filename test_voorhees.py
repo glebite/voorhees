@@ -153,9 +153,9 @@ def test_remove_key():
     result = Voorhees(original).del_keyvalue_pair('something')
     assert result == expected
 
-# @pytest.mark.test_id(25)
-# def test_remove_last_key():
-#     original = {"something": 1}
-#     expected = {}
-#     result = Voorhees(original).del_keyvalue_pair('something')
-#     assert result == expected
+@pytest.mark.test_id(25)
+def test_remove_last_key():
+    original = {"something": 1}
+    expected = {}
+    result = Voorhees(original).del_keyvalue_pair('something')
+    assert result == expected
