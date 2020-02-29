@@ -1,5 +1,5 @@
 import pytest
-from voorhees import Voorhees
+from .voorhees import Voorhees
 
 @pytest.mark.test_id(1)
 def test_simple_copy():
@@ -145,3 +145,17 @@ def test_more_depth():
     result = Voorhees(original).search('destination_addresses')
     expected = ["Washington, DC, USA", "Philadelphia, PA, USA", "Santa Barbara, CA, USA", "Miami, FL, USA", "Austin, TX, USA", "Napa County, CA, USA"]
     assert result == expected
+
+@pytest.mark.test_id(24)
+def test_remove_key():
+    original = {"something": 1, "somethingelse": 2}
+    expected = {"somethingelse": 2}
+    result = Voorhees(original).del_keyvalue_pair('something')
+    assert result == expected
+
+# @pytest.mark.test_id(25)
+# def test_remove_last_key():
+#     original = {"something": 1}
+#     expected = {}
+#     result = Voorhees(original).del_keyvalue_pair('something')
+#     assert result == expected

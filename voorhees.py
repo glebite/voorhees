@@ -18,11 +18,11 @@ class Voorhees:
 
     def __repr__(self):
         """ representation - minimized output """
-        return "<Voorhees {}...>".format(json_string[0:10])
+        return {'incoming_json_string': self.incoming_json_string}
 
     def __str__(self):
         """ string - full string conversion of json_string """
-        return str(self.incoming_json_string)
+        return str(f'Voorhees(json_string={self.incoming_json_string})')
     
     def copy(self):
         """
@@ -58,7 +58,6 @@ class Voorhees:
                     acc_result += str(obj) + ","
             return acc_result
         acc_result = walk(self.incoming_json_string, acc_result)
-        print(acc_result[:-1])
         return json.loads(acc_result[:-1])
 
     def search(self, key, dump_as_json = False):
@@ -67,6 +66,8 @@ class Voorhees:
 
         This is more of an exploration into types, traversal, recursion,
         and a matter of a programming exercise.
+
+        TODO: solve what to do with redundant keys (listify them?)
 
         Params:
             key - the key that is sought for in the dictionary
@@ -108,8 +109,44 @@ class Voorhees:
             raise KeyError
         return acc_result
 
+    def del_keyvalue_pair(self, key):
+        """
+        """
+        acc_result = ""
+        def walk(obj, acc_result, key):
+            """Recursively walk and replicate JSON tree without a specific key."""
+            if isinstance(obj, dict):
+                acc_result += '{'
+                for k, v in obj.items():
+                    if k == key:
+                        continue
+                    if isinstance(v, (dict, list)):
+                        acc_result += '"' + k + '":'                    
+                        acc_result = walk(v, acc_result,key)
+                    else:
+                        acc_result += '"' + k + '":'                                        
+                        if type(v) == str:
+                            acc_result += '"{}",'.format(v)
+                        if type(v) in [int, bool, float]:
+                            acc_result += '{},'.format(v).lower()
+                acc_result = acc_result[:-1]; acc_result += '},'
+            elif isinstance(obj, list):
+                acc_result += '['
+                for item in obj:
+                    acc_result = walk(item, acc_result,key)
+                acc_result = acc_result[:-1]; acc_result += '],'
+            else:
+                if type(obj) == str:
+                    acc_result += '"' + str(obj) + '"' + ","
+                if type(obj) in [int, bool, float]:
+                    acc_result += str(obj) + ","
+            return acc_result
+        acc_result = walk(self.incoming_json_string, acc_result,key)
+        return json.loads(acc_result[:-1])
+
+    
     
 if __name__ == "__main__":
-    original = {"destination_addresses": ["Washington, DC, USA", "Philadelphia, PA, USA", "Santa Barbara, CA, USA", "Miami, FL, USA", "Austin, TX, USA", "Napa County, CA, USA"], "origin_addresses": ["New York, NY, USA"], "rows": [{"elements": [{"distance": {"text": "227 mi", "value": 365468}, "duration": {"text": "3 hours 54 mins", "value": 14064}, "status": "OK"}, {"distance": {"text": "94.6 mi", "value": 152193}, "duration": {"text": "1 hour 44 mins", "value": 6227}, "status": "OK"}, {"distance": {"text": "2,878 mi", "value": 4632197}, "duration": {"text": "1 day 18 hours", "value": 151772}, "status": "OK"}, {"distance": {"text": "1,286 mi", "value": 2069031}, "duration": {"text": "18 hours 43 mins", "value": 67405}, "status": "OK"}, {"distance": {"text": "1,742 mi", "value": 2802972}, "duration": {"text": "1 day 2 hours", "value": 93070}, "status": "OK"}, {"distance": {"text": "2,871 mi", "value": 4620514}, "duration": {"text": "1 day 18 hours", "value": 152913}, "status": "OK"}]}], "status": "OK"}
-    result = Voorhees(original).search('status')
-    print(result)
+    original = {"status": 3}
+    # result = Voorhees(original).del_keyvalue_pair('status')
+    x = Voorhees(original).del_keyvalue_pair('status')
