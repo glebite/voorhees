@@ -111,6 +111,8 @@ class Voorhees:
 
     def del_keyvalue_pair(self, key):
         """
+        del_keyvalue_pair
+        - delete a key value pair from the dictionary
         """
         acc_result = ""
         def walk(obj, acc_result, key):
